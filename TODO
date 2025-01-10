@@ -1,0 +1,11 @@
+(With confirmation) Reset, give up, play again.
+Refactor settings, i18n.
+Graphics and sound.
+Responsive UI.
+Configurable grid cell size and proportions.
+Select from multiple corpora.
+Upload corpus and specify delimiter.
+Specify corpus language.
+Visualise mapping.
+Login and save progress and stats.
+Save and load states, or just undo and redo.

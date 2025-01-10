@@ -1,8 +1,7 @@
+import GameLoader from './components/GameLoader'
+
 function App() {
-  return (
-    <div className="App">
-    </div>
-  )
+  return <GameLoader />
 }
 
 export default App

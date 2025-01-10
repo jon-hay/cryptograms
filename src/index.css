@@ -1,5 +1,5 @@
 body {
-  margin: 0;
+  margin: 0px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -10,4 +10,45 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.gameLoader {
+  margin: 5px;
+}
+
+.grid {
+  margin: 0px;
+  border-width: 0px;
+  padding: 0px;
+  gap: 0px;
+}
+
+.cell {
+  margin: 0px;
+  border-width: 0px;
+  padding: 0px;
+  text-align: center;
+  caret-color: transparent;
+}
+
+.cell:focus {
+  outline-width: 1px;
+  outline-offset: -1px;
+  outline-color: #0000FF;
+}
+
+.cell.unguessed {
+  background-color: #B0C4DE;
+}
+
+.cell.guessed {
+  background-color: #F0F8FF;
+  font-weight: bold;
+  color: #000000;
+}
+
+.cell.conflicted {
+  background-color: #F0F8FF;
+  font-weight: bold;
+  color: #FF0000;
 }
