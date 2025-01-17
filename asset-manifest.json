@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/codebreaker/static/css/main.8469a308.css",
+    "main.js": "/codebreaker/static/js/main.41385b52.js",
+    "index.html": "/codebreaker/index.html",
+    "main.8469a308.css.map": "/codebreaker/static/css/main.8469a308.css.map",
+    "main.41385b52.js.map": "/codebreaker/static/js/main.41385b52.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8469a308.css",
+    "static/js/main.41385b52.js"
+  ]
+}
