@@ -1,4 +1,4 @@
-export const AreRecordsEqual = (
+export const areRecordsEqual = (
   record1: Record<string, string>,
   record2: Record<string, string>,
 ) => {

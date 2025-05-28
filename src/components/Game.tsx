@@ -3,7 +3,7 @@ import useContainerWidth from '../hooks/ContainerWidth'
 import { createCipher } from '../logic/Cipher'
 import { CellState, createGrid } from '../logic/Grid'
 import { getRandomIntegerInRange } from '../logic/Random'
-import { AreRecordsEqual } from '../logic/Utils'
+import { areRecordsEqual } from '../logic/Utils'
 
 type GameProps = {
   texts: string[]
@@ -22,7 +22,7 @@ const Game: React.FC<GameProps> = ({ texts }) => {
   const [guessedEncryptor, setGuessedEncryptor] = useState<Record<string, string>>({})
   const [guessedDecryptor, setGuessedDecryptor] = useState<Record<string, string>>({})
   const [conflictedChar, setConflictedChar] = useState('')
-  const hasWon = AreRecordsEqual(encryptor, guessedEncryptor)
+  const hasWon = areRecordsEqual(encryptor, guessedEncryptor)
   const hasFilledNotWon =
     !hasWon && Object.keys(encryptor).length === Object.keys(guessedEncryptor).length
 
