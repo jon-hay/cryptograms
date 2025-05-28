@@ -218,17 +218,13 @@ const Game: React.FC<GameProps> = ({ texts }) => {
             <input
               className={`cell ${CellState[cell.cellState].toLowerCase()}`}
               key={`input-${i}`}
-              ref={(el) => {
-                inputRefs.current[i] = el
-              }}
+              ref={(el) => {inputRefs.current[i] = el}}
               autoFocus={i === 0}
               maxLength={1}
               value={cell.cellContent}
               onKeyDown={(e) => handleKeyDown(e, i)}
-              onChange={(e) => {}}
-              style={{
-                width: `${cellWidth}px`,
-              }}
+              onChange={() => {}}
+              style={{width: `${cellWidth}px`}}
             />
           </code>
         ))}

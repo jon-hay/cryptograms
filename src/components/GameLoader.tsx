@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Game from './Game'
 import { loadCorpus } from '../logic/Corpus'
 import { getRandomIntegerInRange } from '../logic/Random'
