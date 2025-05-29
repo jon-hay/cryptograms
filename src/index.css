@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+p, input {
+  font-size: 1em;
+}
+
 .gameLoader {
   margin: 5px;
 }
