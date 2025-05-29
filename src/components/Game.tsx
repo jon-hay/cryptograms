@@ -92,17 +92,25 @@ const Game: React.FC<GameProps> = ({ texts }) => {
     /* Deletion */
 
     if (e.key === 'Backspace' || e.key === 'Delete') {
+      if (e.key === 'Backspace'
+        && currCell.cellState !== CellState.GUESSED
+        && currCell.cellState !== CellState.CONFLICTED
+      ) {
+        dst = Math.max(0, i - 1)
+        gotoDst()
+      }
+
       // Delete guess
 
       setGuessedEncryptor((guessedEncryptor) => {
-        const { [currCell.cellContent]: cipherChar, ...rest } = guessedEncryptor
+        const { [cells[dst].cellContent]: cipherChar, ...rest } = guessedEncryptor
 
         setGuessedDecryptor((guessedDecryptor) => {
           const { [cipherChar]: _, ...rest } = guessedDecryptor
           return { ...rest }
         })
 
-        if (conflictedChar === currCell.cellContent) {
+        if (conflictedChar === cells[dst].cellContent) {
           setConflictedChar('')
         }
 
