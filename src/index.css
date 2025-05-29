@@ -13,18 +13,18 @@ code {
 }
 
 p, input {
-  font-size: 1em;
+  font-size: 1rem;
 }
 
 .gameLoader {
-  margin: 5px;
+  margin: 1.5rem;
 }
 
 .grid {
-  margin: 0;
+  margin: 2rem 0;
   border-width: 0;
   padding: 0;
-  gap: 0;
+  gap: 2px 0;
 }
 
 .cell {
