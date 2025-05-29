@@ -12,7 +12,7 @@ type GameProps = {
 const Game: React.FC<GameProps> = ({ texts }) => {
   const defaultCellWidth = 20
   const cellPadding = 2
-  const defaultBuffer = 20
+
   const [baseChar, numChars] = ['A', 26]
   const lastChar = String.fromCharCode(baseChar.charCodeAt(0) + numChars - 1)
 
@@ -39,7 +39,7 @@ const Game: React.FC<GameProps> = ({ texts }) => {
     encryptor,
     guessedDecryptor,
     conflictedChar,
-    gridWidth - defaultBuffer,
+    gridWidth,
     defaultCellWidth,
   )
 
