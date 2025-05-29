@@ -201,14 +201,22 @@ const Game: React.FC<GameProps> = ({ texts }) => {
             ) : (
               <p>
                 Click on each{' '}
-                <span className='cell unguessed'>
-                  UNSOLVED
-                </span>{' '}
-                letter and type in the{' '}
-                <span className='cell guessed'>
-                  CORRECT
-                </span>{' '}
-                letter you think it should be.
+                {[...'UNSOLVED'].map((letter, i) => (
+                  <span
+                    className='cell unguessed'
+                    key={`unguessed-${i}`}
+                    style={{display: 'inline-block', width: `${cellWidth}px`}}
+                  >{letter}</span>
+                ))}
+                {' '}letter and type in the{' '}
+                {[...'CORRECT'].map((letter, i) => (
+                  <span
+                    className='cell guessed'
+                    key={`guessed-${i}`}
+                    style={{display: 'inline-block', width: `${cellWidth}px`}}
+                  >{letter}</span>
+                ))}
+                {' '}letter you think it should be.
               </p>
             )}
           </>
