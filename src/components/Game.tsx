@@ -190,7 +190,7 @@ const Game: React.FC<GameProps> = ({ texts }) => {
               <p>
                 You've used the letter{' '}
                 <span className='cell conflicted'>
-                  <code>{conflictedChar}</code>
+                  {conflictedChar}
                 </span>{' '}
                 already! Consider deleting it first.
               </p>
@@ -202,11 +202,11 @@ const Game: React.FC<GameProps> = ({ texts }) => {
               <p>
                 Click on each{' '}
                 <span className='cell unguessed'>
-                  <code>UNSOLVED</code>
+                  UNSOLVED
                 </span>{' '}
                 letter and type in the{' '}
                 <span className='cell guessed'>
-                  <code>CORRECT</code>
+                  CORRECT
                 </span>{' '}
                 letter you think it should be.
               </p>
@@ -223,28 +223,26 @@ const Game: React.FC<GameProps> = ({ texts }) => {
         }}
       >
         {cells.map((cell, i) => (
-          <code key={`code-${i}`}>
-            <input
-              className={`
-                cell
-                ${CellState[cell.cellState].toLowerCase()}
-                ${(
-                  cell.cellState !== CellState.NONLETTER &&
-                  cell.cellContent === cells[focusedCell].cellContent &&
-                  cell.cellState === cells[focusedCell].cellState
-                ) ? 'focused' : ''}
-              `}
-              key={`input-${i}`}
-              ref={(el) => {inputRefs.current[i] = el}}
-              autoFocus={i === 0}
-              maxLength={1}
-              value={cell.cellContent}
-              onFocus={() => setFocusedCell(i)}
-              onKeyDown={(e) => handleKeyDown(e, i)}
-              onChange={() => {}}
-              style={{width: `${cellWidth}px`}}
-            />
-          </code>
+          <input
+            className={`
+              cell
+              ${CellState[cell.cellState].toLowerCase()}
+              ${(
+                cell.cellState !== CellState.NONLETTER &&
+                cell.cellContent === cells[focusedCell].cellContent &&
+                cell.cellState === cells[focusedCell].cellState
+              ) ? 'focused' : ''}
+            `}
+            key={`input-${i}`}
+            ref={(el) => {inputRefs.current[i] = el}}
+            autoFocus={i === 0}
+            maxLength={1}
+            value={cell.cellContent}
+            onFocus={() => setFocusedCell(i)}
+            onKeyDown={(e) => handleKeyDown(e, i)}
+            onChange={() => {}}
+            style={{width: `${cellWidth}px`}}
+          />
         ))}
       </div>
     </div>
