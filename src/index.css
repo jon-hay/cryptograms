@@ -30,7 +30,7 @@ p, input {
 .cell {
   margin: 0;
   border-width: 0;
-  padding: 0;
+  padding: 2px;
   text-align: center;
   caret-color: transparent;
 }

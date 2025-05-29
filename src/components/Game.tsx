@@ -10,7 +10,8 @@ type GameProps = {
 }
 
 const Game: React.FC<GameProps> = ({ texts }) => {
-  const defaultCellWidth = 15
+  const defaultCellWidth = 20
+  const cellPadding = 2
   const defaultBuffer = 20
   const [baseChar, numChars] = ['A', 26]
   const lastChar = String.fromCharCode(baseChar.charCodeAt(0) + numChars - 1)
@@ -41,6 +42,8 @@ const Game: React.FC<GameProps> = ({ texts }) => {
     gridWidth - defaultBuffer,
     defaultCellWidth,
   )
+
+  const actualCellWidth = cellWidth - 2 * cellPadding
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
 
@@ -205,7 +208,7 @@ const Game: React.FC<GameProps> = ({ texts }) => {
                   <span
                     className='cell unguessed'
                     key={`unguessed-${i}`}
-                    style={{display: 'inline-block', width: `${cellWidth}px`}}
+                    style={{display: 'inline-block', width: `${actualCellWidth}px`}}
                   >{letter}</span>
                 ))}
                 {' '}letter and type in the{' '}
@@ -213,7 +216,7 @@ const Game: React.FC<GameProps> = ({ texts }) => {
                   <span
                     className='cell guessed'
                     key={`guessed-${i}`}
-                    style={{display: 'inline-block', width: `${cellWidth}px`}}
+                    style={{display: 'inline-block', width: `${actualCellWidth}px`}}
                   >{letter}</span>
                 ))}
                 {' '}letter you think it should be.
@@ -249,7 +252,7 @@ const Game: React.FC<GameProps> = ({ texts }) => {
             onFocus={() => setFocusedCell(i)}
             onKeyDown={(e) => handleKeyDown(e, i)}
             onChange={() => {}}
-            style={{width: `${cellWidth}px`}}
+            style={{width: `${actualCellWidth}px`}}
           />
         ))}
       </div>
