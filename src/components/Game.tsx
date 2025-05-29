@@ -22,6 +22,7 @@ const Game: React.FC<GameProps> = ({ texts }) => {
   const [guessedEncryptor, setGuessedEncryptor] = useState<Record<string, string>>({})
   const [guessedDecryptor, setGuessedDecryptor] = useState<Record<string, string>>({})
   const [conflictedChar, setConflictedChar] = useState('')
+  const [focusedCell, setFocusedCell] = useState(0)
   const hasWon = areRecordsEqual(encryptor, guessedEncryptor)
   const hasFilledNotWon =
     !hasWon && Object.keys(encryptor).length === Object.keys(guessedEncryptor).length
@@ -224,12 +225,21 @@ const Game: React.FC<GameProps> = ({ texts }) => {
         {cells.map((cell, i) => (
           <code key={`code-${i}`}>
             <input
-              className={`cell ${CellState[cell.cellState].toLowerCase()}`}
+              className={`
+                cell
+                ${CellState[cell.cellState].toLowerCase()}
+                ${(
+                  cell.cellState !== CellState.NONLETTER &&
+                  cell.cellContent === cells[focusedCell].cellContent &&
+                  cell.cellState === cells[focusedCell].cellState
+                ) ? 'focused' : ''}
+              `}
               key={`input-${i}`}
               ref={(el) => {inputRefs.current[i] = el}}
               autoFocus={i === 0}
               maxLength={1}
               value={cell.cellContent}
+              onFocus={() => setFocusedCell(i)}
               onKeyDown={(e) => handleKeyDown(e, i)}
               onChange={() => {}}
               style={{width: `${cellWidth}px`}}

@@ -52,3 +52,7 @@ code {
   font-weight: bold;
   color: #FF0000;
 }
+
+.cell.focused {
+  background-color: #F9E79F;
+}
