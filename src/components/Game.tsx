@@ -189,44 +189,42 @@ const Game: React.FC<GameProps> = ({ texts }) => {
           {!hasWon && <i>Codebreaker</i>}
           {hasWon && <>You Win!</>}
         </h1>
-        {!hasWon && (
-          <>
-            <p>Break the code! Every letter has been (possibly) substituted by another letter.</p>
-            {conflictedChar !== '' ? (
-              <p>
-                You've used the letter{' '}
-                <span className='cell conflicted'>
-                  {conflictedChar}
-                </span>{' '}
-                already! Consider deleting it first.
-              </p>
-            ) : hasFilledNotWon ? (
-              <p>
-                Hmm, <span className='cell conflicted'>something isn't quite right...</span>
-              </p>
-            ) : (
-              <p>
-                Click on each{' '}
-                {[...'UNSOLVED'].map((letter, i) => (
-                  <span
-                    className='cell unguessed'
-                    key={`unguessed-${i}`}
-                    style={{display: 'inline-block', width: `${actualCellWidth}px`}}
-                  >{letter}</span>
-                ))}
-                {' '}letter and type in the{' '}
-                {[...'CORRECT'].map((letter, i) => (
-                  <span
-                    className='cell guessed'
-                    key={`guessed-${i}`}
-                    style={{display: 'inline-block', width: `${actualCellWidth}px`}}
-                  >{letter}</span>
-                ))}
-                {' '}letter you think it should be.
-              </p>
-            )}
-          </>
-        )}
+        {!hasWon && <>
+          <p>Break the code! Every letter has been (possibly) substituted by another letter.</p>
+          {conflictedChar !== '' ? (
+            <p>
+              You've used the letter{' '}
+              <span className='cell conflicted'>
+                {conflictedChar}
+              </span>{' '}
+              already! Consider deleting it first.
+            </p>
+          ) : hasFilledNotWon ? (
+            <p>
+              Hmm, <span className='cell conflicted'>something isn't quite right...</span>
+            </p>
+          ) : (
+            <p>
+              Click on each{' '}
+              {[...'UNSOLVED'].map((letter, i) => (
+                <span
+                  className='cell unguessed'
+                  key={`unguessed-${i}`}
+                  style={{display: 'inline-block', width: `${actualCellWidth}px`}}
+                >{letter}</span>
+              ))}
+              {' '}letter and type in the{' '}
+              {[...'CORRECT'].map((letter, i) => (
+                <span
+                  className='cell guessed'
+                  key={`guessed-${i}`}
+                  style={{display: 'inline-block', width: `${actualCellWidth}px`}}
+                >{letter}</span>
+              ))}
+              {' '}letter you think it should be.
+            </p>
+          )}
+        </>}
       </div>
       <div
         className='grid'
