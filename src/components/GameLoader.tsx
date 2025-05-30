@@ -4,6 +4,8 @@ import { loadCorpus } from '../logic/Corpus'
 import { getRandomIntegerInRange } from '../logic/Random'
 
 const GameLoader = () => {
+  const minTextLen = 500
+
   const corpora = [
     [`${process.env.PUBLIC_URL}/corpora/abc_rural.corpus`, '\n\n'],
     [`${process.env.PUBLIC_URL}/corpora/abc_science.corpus`, '\n\n'],
@@ -17,7 +19,7 @@ const GameLoader = () => {
   const [texts, setTexts] = useState<string[]>([])
 
   useEffect(() => {
-    loadCorpus(corpusUrl, delimiter, setIsLoading, setIsError, setTexts)
+    loadCorpus(corpusUrl, delimiter, minTextLen, setIsLoading, setIsError, setTexts)
   }, [corpusUrl, delimiter])
 
   return (
