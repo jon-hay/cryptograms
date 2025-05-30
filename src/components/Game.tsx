@@ -190,22 +190,28 @@ const Game: React.FC<GameProps> = ({ texts }) => {
           {hasWon && <>You Win!</>}
         </h1>
         {!hasWon && <>
-          <p>Break the code! Every letter has been (possibly) substituted by another letter.</p>
+          <p>Break the code! Each letter has (possibly) been replaced with a different one.</p>
           {conflictedChar !== '' ? (
             <p>
-              You've used the letter{' '}
-              <span className='cell conflicted'>
-                {conflictedChar}
-              </span>{' '}
-              already! Consider deleting it first.
+              {'You\'ve already used the letter '}
+              <span
+                className='cell conflicted'
+                style={{display: 'inline-block', width: `${actualCellWidth}px`}}
+              >{conflictedChar}</span>
+              {' ! Try deleting it first.'}
             </p>
           ) : hasFilledNotWon ? (
             <p>
-              Hmm, <span className='cell conflicted'>something isn't quite right...</span>
+              {'Hmm... '}
+              <span
+                className='cell conflicted'
+                style={{display: 'inline-block', width: 'auto'}}
+              >{'something\'s not quite right.'}</span>
+              {' Double-check your guesses!'}
             </p>
           ) : (
             <p>
-              Click on each{' '}
+              {'Click an '}
               {[...'UNSOLVED'].map((letter, i) => (
                 <span
                   className='cell unguessed'
@@ -213,15 +219,15 @@ const Game: React.FC<GameProps> = ({ texts }) => {
                   style={{display: 'inline-block', width: `${actualCellWidth}px`}}
                 >{letter}</span>
               ))}
-              {' '}letter and type in the{' '}
-              {[...'CORRECT'].map((letter, i) => (
+              {' letter and type in your '}
+              {[...'GUESS'].map((letter, i) => (
                 <span
                   className='cell guessed'
                   key={`guessed-${i}`}
                   style={{display: 'inline-block', width: `${actualCellWidth}px`}}
                 >{letter}</span>
               ))}
-              {' '}letter you think it should be.
+              {'.'}
             </p>
           )}
         </>}
