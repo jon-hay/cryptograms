@@ -185,7 +185,10 @@ const Game: React.FC<GameProps> = ({ texts }) => {
   return (
     <div className='game'>
       <div className='header'>
-        {hasWon && <h1>You Win!</h1>}
+        <h1>
+          {!hasWon && <i>Codebreaker</i>}
+          {hasWon && <>You Win!</>}
+        </h1>
         {!hasWon && (
           <>
             <p>Break the code! Every letter has been (possibly) substituted by another letter.</p>
