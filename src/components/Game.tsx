@@ -24,6 +24,8 @@ const Game: React.FC<GameProps> = ({ texts }) => {
   const [guessedDecryptor, setGuessedDecryptor] = useState<Record<string, string>>({})
   const [conflictedChar, setConflictedChar] = useState('')
   const [focusedCell, setFocusedCell] = useState(0)
+  const [showHint, setShowHint] = useState(false)
+
   const hasWon = areRecordsEqual(encryptor, guessedEncryptor)
   const hasFilledNotWon =
     !hasWon && Object.keys(encryptor).length === Object.keys(guessedEncryptor).length
@@ -230,6 +232,12 @@ const Game: React.FC<GameProps> = ({ texts }) => {
               {'.'}
             </p>
           )}
+          <button onClick={() => setShowHint(!showHint)}>{showHint ? 'Hide' : 'Show'} Hint</button>
+          {showHint && <p style={{lineHeight: `1.5rem`}}>
+            <b>Common short words:</b> A, I<br />
+            AM, AN, AS, AT, BE, BY, DO, GO, HE, IF, IN, IS, IT, ME, MY, NO, OF, ON, OR, SO, TO, UP, US, WE<br />
+            ALL, AND, ARE, BUT, CAN, FOR, HAD, HAS, HER, HIM, HIS, ITS, NOT, ONE, OUT, SHE, THE, WAS, WHO, YOU
+          </p>}
         </>}
       </div>
       <div
