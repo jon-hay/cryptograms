@@ -2,22 +2,19 @@ import React, { useRef, useState } from 'react'
 import useContainerWidth from '../hooks/ContainerWidth'
 import { createCipher } from '../logic/Cipher'
 import { CellState, createGrid } from '../logic/Grid'
-import { getRandomIntegerInRange } from '../logic/Random'
 import { areRecordsEqual } from '../logic/Utils'
 
 type GameProps = {
-  texts: string[]
+  plaintext: string
+  nextPlaintext: () => void
 }
 
-const Game: React.FC<GameProps> = ({ texts }) => {
+const Game: React.FC<GameProps> = ({ plaintext, nextPlaintext }) => {
   const defaultCellWidth = 20
   const cellPadding = 2
 
   const [baseChar, numChars] = ['A', 26]
   const lastChar = String.fromCharCode(baseChar.charCodeAt(0) + numChars - 1)
-
-  const [textIndex] = useState(getRandomIntegerInRange(0, texts.length - 1))
-  const [plaintext] = useState(texts[textIndex].toUpperCase())
   const [encryptor] = useState(createCipher(plaintext, baseChar, numChars).encryptor)
 
   const [guessedEncryptor, setGuessedEncryptor] = useState<Record<string, string>>({})
@@ -187,11 +184,12 @@ const Game: React.FC<GameProps> = ({ texts }) => {
   return (
     <div className='game'>
       <div className='header'>
-        <h1>
-          {!hasWon && <i>Codebreaker</i>}
-          {hasWon && <>You Win!</>}
-        </h1>
+        {hasWon && <>
+          <h1>You Win!</h1>
+          <button onClick={() => nextPlaintext()}>New Game</button>
+        </>}
         {!hasWon && <>
+          <h1><i>Codebreaker</i></h1>
           <p>Break the code! Each letter has (possibly) been replaced with a different one.</p>
           {conflictedChar !== '' ? (
             <p>

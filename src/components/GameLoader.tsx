@@ -17,16 +17,27 @@ const GameLoader = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState(false)
   const [texts, setTexts] = useState<string[]>([])
+  const [textIndex, setTextIndex] = useState(0)
 
   useEffect(() => {
     loadCorpus(corpusUrl, delimiter, minTextLen, setIsLoading, setIsError, setTexts)
   }, [corpusUrl, delimiter])
 
+  useEffect(() => {
+    setTextIndex(getRandomIntegerInRange(0, texts.length - 1))
+  }, [texts.length])
+
   return (
     <div className='gameLoader'>
       {isLoading && <p>Loading...</p>}
       {isError && <p>Error! Try refreshing the page.</p>}
-      {!isLoading && !isError && <Game texts={texts} />}
+      {!isLoading && !isError && <Game
+        key={`${corporaIndex}-${textIndex}`}
+        plaintext={texts[textIndex].toUpperCase()}
+        nextPlaintext={() => {
+          setTextIndex((textIndex + 1) % texts.length)
+        }}
+      />}
     </div>
   )
 }
