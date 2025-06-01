@@ -15,6 +15,7 @@ const Game: React.FC<GameProps> = ({ plaintext, nextPlaintext }) => {
 
   const [baseChar, numChars] = ['A', 26]
   const lastChar = String.fromCharCode(baseChar.charCodeAt(0) + numChars - 1)
+  const letters = Array.from({length: numChars}, (_, i) => String.fromCharCode(baseChar.charCodeAt(0) + i))
   const [encryptor] = useState(createCipher(plaintext, baseChar, numChars).encryptor)
 
   const [guessedEncryptor, setGuessedEncryptor] = useState<Record<string, string>>({})
@@ -46,7 +47,7 @@ const Game: React.FC<GameProps> = ({ plaintext, nextPlaintext }) => {
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, i: number) => {
+  const handleKeyDown = (e_key: string, i: number) => {
     const currCell = cells[i]
 
     /* Navigation */
@@ -56,7 +57,7 @@ const Game: React.FC<GameProps> = ({ plaintext, nextPlaintext }) => {
     const gotoDst = () => {
       if (dst !== i) {
         inputRefs.current[dst]?.focus()
-        e.preventDefault()
+        // e.preventDefault()
         return true
       }
 
@@ -83,10 +84,10 @@ const Game: React.FC<GameProps> = ({ plaintext, nextPlaintext }) => {
       return gotoDst()
     }
 
-    if (e.key === 'ArrowLeft') dst = Math.max(0, i - 1)
-    if (e.key === 'ArrowRight') dst = Math.min(cells.length - 1, i + 1)
-    if (e.key === 'ArrowUp') dst = Math.max(0, i - numCols)
-    if (e.key === 'ArrowDown') dst = Math.min(cells.length - 1, i + numCols)
+    if (e_key === 'ArrowLeft') dst = Math.max(0, i - 1)
+    if (e_key === 'ArrowRight') dst = Math.min(cells.length - 1, i + 1)
+    if (e_key === 'ArrowUp') dst = Math.max(0, i - numCols)
+    if (e_key === 'ArrowDown') dst = Math.min(cells.length - 1, i + numCols)
 
     if (gotoDst()) {
       return
@@ -94,8 +95,8 @@ const Game: React.FC<GameProps> = ({ plaintext, nextPlaintext }) => {
 
     /* Deletion */
 
-    if (e.key === 'Backspace' || e.key === 'Delete') {
-      if (e.key === 'Backspace'
+    if (e_key === 'Backspace' || e_key === 'Delete') {
+      if (e_key === 'Backspace'
         && currCell.cellState !== CellState.GUESSED
         && currCell.cellState !== CellState.CONFLICTED
       ) {
@@ -123,14 +124,14 @@ const Game: React.FC<GameProps> = ({ plaintext, nextPlaintext }) => {
 
     /* Input */
 
-    if (e.key.length === 1) {
+    if (e_key.length === 1) {
       // Cannot make guesses for nonletters
       if (currCell.cellState === CellState.NONLETTER) {
         return
       }
 
       // Cannot guess letters as nonletters
-      const pressedChar = e.key.toUpperCase()
+      const pressedChar = e_key.toUpperCase()
       if (!(baseChar <= pressedChar && pressedChar <= lastChar)) {
         return
       }
@@ -230,12 +231,27 @@ const Game: React.FC<GameProps> = ({ plaintext, nextPlaintext }) => {
               {'.'}
             </p>
           )}
-          <button onClick={() => setShowHint(!showHint)}>{showHint ? 'Hide' : 'Show'} Hint</button>
-          {showHint && <p style={{lineHeight: `1.5rem`}}>
-            <b>Common short words:</b> A, I<br />
-            AM, AN, AS, AT, BE, BY, DO, GO, HE, IF, IN, IS, IT, ME, MY, NO, OF, ON, OR, SO, TO, UP, US, WE<br />
-            ALL, AND, ARE, BUT, CAN, FOR, HAD, HAS, HER, HIM, HIS, ITS, NOT, ONE, OUT, SHE, THE, WAS, WHO, YOU
-          </p>}
+          <div className='keyboard'>
+            {'Remaining: '}
+            {letters.map((letter, i) => (
+              <button
+                className='keyboard-letter'
+                key={`keyboard-letter-${i}`}
+                onClick={() => handleKeyDown(letter, focusedCell)}
+                disabled={letter in guessedEncryptor}
+              >
+                {letter}
+              </button>
+            ))}
+          </div>
+          <div className='hint'>
+            <button onClick={() => setShowHint(!showHint)}>{showHint ? 'Hide' : 'Show'} Hint</button>
+            {showHint && <p style={{lineHeight: `1.5rem`}}>
+              <b>Common short words:</b> A, I<br />
+              AM, AN, AS, AT, BE, BY, DO, GO, HE, IF, IN, IS, IT, ME, MY, NO, OF, ON, OR, SO, TO, UP, US, WE<br />
+              ALL, AND, ARE, BUT, CAN, FOR, HAD, HAS, HER, HIM, HIS, ITS, NOT, ONE, OUT, SHE, THE, WAS, WHO, YOU
+            </p>}
+          </div>
         </>}
       </div>
       <div
@@ -263,7 +279,7 @@ const Game: React.FC<GameProps> = ({ plaintext, nextPlaintext }) => {
             maxLength={1}
             value={cell.cellContent}
             onFocus={() => setFocusedCell(i)}
-            onKeyDown={(e) => handleKeyDown(e, i)}
+            onKeyDown={(e) => handleKeyDown(e.key, i)}
             onChange={() => {}}
             style={{width: `${actualCellWidth}px`}}
           />
