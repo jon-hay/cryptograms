@@ -31,13 +31,15 @@ const GameLoader = () => {
     <div className='gameLoader'>
       {isLoading && <p>Loading...</p>}
       {isError && <p>Error! Try refreshing the page.</p>}
-      {!isLoading && !isError && <Game
-        key={`${corporaIndex}-${textIndex}`}
-        plaintext={texts[textIndex].toUpperCase()}
-        nextPlaintext={() => {
-          setTextIndex((textIndex + 1) % texts.length)
-        }}
-      />}
+      {!isLoading && !isError && (
+        <Game
+          key={`${corporaIndex}-${textIndex}`}
+          plaintext={texts[textIndex].toUpperCase()}
+          nextPlaintext={() => {
+            setTextIndex((textIndex + 1) % texts.length)
+          }}
+        />
+      )}
     </div>
   )
 }
