@@ -197,7 +197,7 @@ const Game: React.FC<GameProps> = ({ plaintext, nextPlaintext }) => {
         {!hasWon && (
           <>
             <h1>
-              <i>Codebreaker</i>
+              <i>Cryptograms</i>
             </h1>
             <p>Break the code! Each letter has (possibly) been replaced with a different one.</p>
             {conflictedChar !== '' ? (
