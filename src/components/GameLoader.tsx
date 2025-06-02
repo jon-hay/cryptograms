@@ -29,7 +29,7 @@ const GameLoader = () => {
   }, [texts.length])
 
   return (
-    <div className='gameLoader'>
+    <div className='game-loader'>
       {isLoading && <p>Loading...</p>}
       {isError && <p>Error! Try refreshing the page.</p>}
       {!isLoading && !isError && (

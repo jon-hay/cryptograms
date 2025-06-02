@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #F7F9F9;
 }
 
 code {
@@ -17,31 +18,52 @@ input {
 }
 
 button {
+  margin: 0 1px 1px 0;
   height: 25px;
 }
 
+.game-loader {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 1.5rem;
+  height: calc(100dvh - 2rem);
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 0;
+}
+
+.header {
+  flex: 0 0 auto;
+}
+
 .keyboard {
-  margin-bottom: 1rem;
+  margin-top: 1.25rem;
 }
 
 .keyboard-letter {
-  margin: 0 1px 1px 0;
   padding: 0;
   width: 25px;
 }
 
-.gameLoader {
-  margin: 1.5rem;
+.hint {
+  margin-bottom: 0;
 }
 
 .grid {
-  margin: 2rem 0;
+  flex: 0 1 auto;
+  overflow-y: auto;
+  margin-top: 1.5rem;
   border-width: 0;
   padding: 0;
   gap: 2px 0;
 }
 
 .cell {
+  background-color: #F7F9F9;
   margin: 0;
   border-width: 0;
   padding: 2px;
@@ -62,13 +84,13 @@ button {
 }
 
 .cell.guessed {
-  background-color: #F0F8FF;
+  background-color: #F7F9F9;
   font-weight: bold;
   color: #000000;
 }
 
 .cell.conflicted {
-  background-color: #F0F8FF;
+  background-color: #F7F9F9;
   font-weight: bold;
   color: #FF0000;
 }

@@ -244,11 +244,10 @@ const Game: React.FC<GameProps> = ({ plaintext, nextPlaintext }) => {
                     {letter}
                   </span>
                 ))}
-                {'.'}
+                {' or use this handy keyboard.'}
               </p>
             )}
             <div className='keyboard'>
-              {'Remaining: '}
               {letters.map((letter, i) => (
                 <button
                   className='keyboard-letter'
@@ -260,19 +259,21 @@ const Game: React.FC<GameProps> = ({ plaintext, nextPlaintext }) => {
                 </button>
               ))}
               <button onClick={() => handleKeyDown('Backspace', focusedCell)}>Backspace</button>
-            </div>
-            <div className='hint'>
               <button onClick={() => setShowHint(!showHint)}>
                 {showHint ? 'Hide' : 'Show'} Hint
               </button>
               {showHint && (
-                <p style={{ lineHeight: `1.5rem` }}>
-                  <b>Common short words:</b> A, I<br />
-                  AM, AN, AS, AT, BE, BY, DO, GO, HE, IF, IN, IS, IT, ME, MY, NO, OF, ON, OR, SO,
-                  TO, UP, US, WE
+                <p className='hint'>
+                  <b>Common short words:</b>
+                  <code> A I</code>
                   <br />
-                  ALL, AND, ARE, BUT, CAN, FOR, HAD, HAS, HER, HIM, HIS, ITS, NOT, ONE, OUT, SHE,
-                  THE, WAS, WHO, YOU
+                  <code>
+                    AM AN AS AT BE BY DO GO HE IF IN IS IT ME MY NO OF ON OR SO TO UP US WE
+                  </code>
+                  <br />
+                  <code>
+                    ALL AND ARE BUT CAN FOR HAD HAS HER HIM HIS ITS NOT ONE OUT SHE THE WAS WHO YOU
+                  </code>
                 </p>
               )}
             </div>
@@ -304,6 +305,7 @@ const Game: React.FC<GameProps> = ({ plaintext, nextPlaintext }) => {
             ref={(el) => {
               inputRefs.current[i] = el
             }}
+            readOnly
             autoFocus={i === 0}
             maxLength={1}
             value={cell.cellContent}
