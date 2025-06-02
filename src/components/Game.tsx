@@ -259,6 +259,7 @@ const Game: React.FC<GameProps> = ({ plaintext, nextPlaintext }) => {
                   {letter}
                 </button>
               ))}
+              <button onClick={() => handleKeyDown('Backspace', focusedCell)}>Backspace</button>
             </div>
             <div className='hint'>
               <button onClick={() => setShowHint(!showHint)}>
