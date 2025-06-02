@@ -13,6 +13,7 @@ export const createGrid = (
   gridWidth: number,
   cellWidth: number,
 ) => {
+  const respectNewline = false
   const plainWords = plaintext.split(/(\s+)/)
 
   const minCols = Math.max(...plainWords.map((w, _) => w.length))
@@ -26,7 +27,7 @@ export const createGrid = (
     const plainWord = plainWords[i]
 
     if (/^\s+$/.test(plainWord)) {
-      if (plainWord.includes('\n')) {
+      if (respectNewline && plainWord.includes('\n')) {
         for (let c = 0; c < remainingCols; ++c) {
           cells.push({ cellContent: ' ', cellState: CellState.NONLETTER })
         }

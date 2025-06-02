@@ -7,8 +7,9 @@ const GameLoader = () => {
   const minTextLen = 500
 
   const corpora = [
-    [`${process.env.PUBLIC_URL}/corpora/abc_rural.corpus`, '\n\n'],
-    [`${process.env.PUBLIC_URL}/corpora/abc_science.corpus`, '\n\n'],
+    [`${process.env.PUBLIC_URL}/corpora/austen-emma.txt`, '\n\n'],
+    [`${process.env.PUBLIC_URL}/corpora/austen-persuasion.txt`, '\n\n'],
+    [`${process.env.PUBLIC_URL}/corpora/austen-sense.txt`, '\n\n'],
   ]
 
   const [corporaIndex] = useState(getRandomIntegerInRange(0, corpora.length - 1))
@@ -34,7 +35,7 @@ const GameLoader = () => {
       {!isLoading && !isError && (
         <Game
           key={`${corporaIndex}-${textIndex}`}
-          plaintext={texts[textIndex].toUpperCase()}
+          plaintext={texts[textIndex].trim().toUpperCase()}
           nextPlaintext={() => {
             setTextIndex((textIndex + 1) % texts.length)
           }}
