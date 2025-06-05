@@ -46,6 +46,7 @@ const Game: React.FC<GameProps> = ({ plaintext, nextPlaintext }) => {
     defaultCellWidth,
   )
 
+  const focusIndex = cells.findIndex((cell) => cell.cellState === CellState.UNGUESSED)
   const actualCellWidth = cellWidth - 2 * cellPadding
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
@@ -316,7 +317,7 @@ const Game: React.FC<GameProps> = ({ plaintext, nextPlaintext }) => {
               inputRefs.current[i] = el
             }}
             readOnly
-            autoFocus={i === 0}
+            autoFocus={i === focusIndex}
             maxLength={1}
             value={cell.cellContent}
             onFocus={() => setFocusedCell(i)}
