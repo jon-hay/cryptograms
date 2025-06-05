@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/codebreaker/static/css/main.8469a308.css",
-    "main.js": "/codebreaker/static/js/main.41385b52.js",
-    "index.html": "/codebreaker/index.html",
-    "main.8469a308.css.map": "/codebreaker/static/css/main.8469a308.css.map",
-    "main.41385b52.js.map": "/codebreaker/static/js/main.41385b52.js.map"
+    "main.css": "/cryptograms/static/css/main.3f35bef0.css",
+    "main.js": "/cryptograms/static/js/main.444f7ab3.js",
+    "index.html": "/cryptograms/index.html",
+    "main.3f35bef0.css.map": "/cryptograms/static/css/main.3f35bef0.css.map",
+    "main.444f7ab3.js.map": "/cryptograms/static/js/main.444f7ab3.js.map"
   },
   "entrypoints": [
-    "static/css/main.8469a308.css",
-    "static/js/main.41385b52.js"
+    "static/css/main.3f35bef0.css",
+    "static/js/main.444f7ab3.js"
   ]
 }
