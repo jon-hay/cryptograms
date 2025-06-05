@@ -25,6 +25,7 @@ const Game: React.FC<GameProps> = ({ plaintext, nextPlaintext }) => {
   const [conflictedChar, setConflictedChar] = useState('')
   const [focusedCell, setFocusedCell] = useState(0)
   const [showHint, setShowHint] = useState(false)
+  const [showInstr, setShowInstr] = useState(true)
 
   const hasWon = areRecordsEqual(encryptor, guessedEncryptor)
   const hasFilledNotWon =
@@ -196,56 +197,62 @@ const Game: React.FC<GameProps> = ({ plaintext, nextPlaintext }) => {
         )}
         {!hasWon && (
           <>
-            <h1>
-              <i>Cryptograms</i>
-            </h1>
-            <p>Break the code! Each letter has (possibly) been replaced with a different one.</p>
-            {conflictedChar !== '' ? (
-              <p>
-                {"You've already used the letter "}
-                <span
-                  className='cell conflicted'
-                  style={{ display: 'inline-block', width: `${actualCellWidth}px` }}
-                >
-                  {conflictedChar}
-                </span>
-                {' ! Try deleting it first.'}
-              </p>
-            ) : hasFilledNotWon ? (
-              <p>
-                {'Hmm... '}
-                <span
-                  className='cell conflicted'
-                  style={{ display: 'inline-block', width: 'auto' }}
-                >
-                  {"something's not quite right."}
-                </span>
-                {' Double-check your guesses!'}
-              </p>
-            ) : (
-              <p>
-                {'Click an '}
-                {[...'UNSOLVED'].map((letter, i) => (
-                  <span
-                    className='cell unguessed'
-                    key={`unguessed-${i}`}
-                    style={{ display: 'inline-block', width: `${actualCellWidth}px` }}
-                  >
-                    {letter}
-                  </span>
-                ))}
-                {' letter and type in your '}
-                {[...'GUESS'].map((letter, i) => (
-                  <span
-                    className='cell guessed'
-                    key={`guessed-${i}`}
-                    style={{ display: 'inline-block', width: `${actualCellWidth}px` }}
-                  >
-                    {letter}
-                  </span>
-                ))}
-                {' or use this handy keyboard.'}
-              </p>
+            {showInstr && (
+              <div className='instr'>
+                <h1>
+                  <i>Cryptograms</i>
+                </h1>
+                <p>
+                  Break the code! Each letter has (possibly) been replaced with a different one.
+                </p>
+                {conflictedChar !== '' ? (
+                  <p>
+                    {"You've already used the letter "}
+                    <span
+                      className='cell conflicted'
+                      style={{ display: 'inline-block', width: `${actualCellWidth}px` }}
+                    >
+                      {conflictedChar}
+                    </span>
+                    {' ! Try deleting it first.'}
+                  </p>
+                ) : hasFilledNotWon ? (
+                  <p>
+                    {'Hmm... '}
+                    <span
+                      className='cell conflicted'
+                      style={{ display: 'inline-block', width: 'auto' }}
+                    >
+                      {"something's not quite right."}
+                    </span>
+                    {' Double-check your guesses!'}
+                  </p>
+                ) : (
+                  <p>
+                    {'Click an '}
+                    {[...'UNSOLVED'].map((letter, i) => (
+                      <span
+                        className='cell unguessed'
+                        key={`unguessed-${i}`}
+                        style={{ display: 'inline-block', width: `${actualCellWidth}px` }}
+                      >
+                        {letter}
+                      </span>
+                    ))}
+                    {' letter and type in your '}
+                    {[...'GUESS'].map((letter, i) => (
+                      <span
+                        className='cell guessed'
+                        key={`guessed-${i}`}
+                        style={{ display: 'inline-block', width: `${actualCellWidth}px` }}
+                      >
+                        {letter}
+                      </span>
+                    ))}
+                    {' or use this handy keyboard.'}
+                  </p>
+                )}
+              </div>
             )}
             <div className='keyboard'>
               {letters.map((letter, i) => (
@@ -261,6 +268,9 @@ const Game: React.FC<GameProps> = ({ plaintext, nextPlaintext }) => {
               <button onClick={() => handleKeyDown('Backspace', focusedCell)}>Backspace</button>
               <button onClick={() => setShowHint(!showHint)}>
                 {showHint ? 'Hide' : 'Show'} Hint
+              </button>
+              <button onClick={() => setShowInstr(!showInstr)}>
+                {showInstr ? 'Hide' : 'Show'} Instructions
               </button>
               {showHint && (
                 <p className='hint'>
